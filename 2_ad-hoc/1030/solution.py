@@ -20,7 +20,8 @@ def get_survivor(n, k):
     return numbers[0]
 
 for case in range(1, NC + 1):
-    n = int(input())
-    k = int(input())
+    inputs = input().split(' ')
+    n = int(inputs[0])
+    k = int(inputs[1])
 
     print("Case %d: %d" % (case, get_survivor(n, k)))
