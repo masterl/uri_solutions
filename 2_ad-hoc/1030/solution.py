@@ -4,24 +4,27 @@
 
 NC = int(input())
 
-def get_survivor(n, k):
-    numbers = []
-    index = -1
+def get_survivor_remainder(n, k):
+    survivor = 1
+    i = 1
 
-    if k == 1:
-        return n
+    if n >= 2 and (k % 2 == 1):
+        survivor = 2
+        i = 2
+    while i < n:
+        i += 1
+        survivor += k
+        if survivor > i:
+            survivor %= i
 
-    numbers = list(range(1, n + 1))
-    while len(numbers) > 1:
-        exclude = (index + k) % len(numbers)
-        numbers.remove(numbers[exclude])
-        index = exclude - 1
+            if survivor == 0:
+                survivor = i
 
-    return numbers[0]
+    return survivor
 
 for case in range(1, NC + 1):
     inputs = input().split(' ')
     n = int(inputs[0])
     k = int(inputs[1])
 
-    print("Case %d: %d" % (case, get_survivor(n, k)))
+    print("Case %d: %d" % (case, get_survivor_remainder(n, k)))
