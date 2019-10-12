@@ -13,6 +13,8 @@ function main()
   ensure_project_root_was_informed "$PROJECT_ROOT"
   ensure_mode_was_informed "$MODE"
 
+  python --version
+
   if [ "$MODE" = "--test" ];
   then
     run_tests
@@ -39,7 +41,7 @@ function run_tests()
 {
   echo "Running tests..."
   print_line
-  python -m unittest "$TARGET_FILE"
+  time python -m unittest "$TARGET_FILE"
 }
 
 function run_script()
@@ -54,9 +56,9 @@ function run_script()
 
   if [ -f "$input_file" ]
   then
-    python "$TARGET_FILE" < "$input_file"
+    time python "$TARGET_FILE" < "$input_file"
   else
-    python "$TARGET_FILE"
+    time python "$TARGET_FILE"
   fi
 }
 
